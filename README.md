@@ -1,139 +1,115 @@
-# **Problem Definition**
 
----
+# Car Listing Marketplace API
 
-## Background
+Welcome to the Car Listing Marketplace API! This API allows users to browse and interact with car listings, make bookings, and more.
 
-In the evolving landscape of online marketplaces, there is a need for a specialized platform that caters to the automotive industry. The **Car Listing Marketplace** aims to provide a seamless experience for users to browse, search, and interact with car listings. The platform allows superusers to contribute by creating listings, and users can easily find and book cars based on their preferences.
+## Table of Contents
 
-## Functional Requirements
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Features](#features)
+- [Unit Tests](#unit-tests)
+- [Docker Compose](#docker-compose)
+- [Prisma ORM](#prisma-orm)
+- [Swagger API Docs](#swagger-api-docs)
+- [Service Design Document](#service-design-document)
+- [Future Work](#future-work)
 
-1. Superusers can create car listings.
-2. Users can search for cars by make or model.
-3. Users can filter searches by pricing, year, mileage, or other car specifications.
-4. Users can book and cancel car bookings.
-5. Searches reflect bookings made by other users.
-6. Bookings cannot be canceled within the first 24 hours.
 
-## Constraints
+## Introduction
 
-- The system should be built using Node.js.
-- User sessions should be properly handled.
+The Car Listing Marketplace API is designed to provide a seamless experience for users to explore car listings, make bookings, and manage their interactions within the marketplace.
 
-# Problem Analysis
+## Getting Started
 
----
+To run the project locally, follow these steps:
 
-### System Context Diagram
+1. Clone the repository:
 
-Inputs: User requests, Superuser input
+   ```bash
+   git clone https://github.com/your-username/car-listing-marketplace-api.git
+   cd car-listing-marketplace-api
+   ```
 
-Output: Filtered car listings, Bookings
+2. Install dependencies:
 
-```mermaid
-graph TD
-  A[User] -->|Makes Request| B[CaTrip]
-  C[Superuser] -->|Creates Cars | B
-  B -->|Returns Filtered Listings| A
-  A -->|Books/Cancel Booking| B
-  B -->|Returns Booking Status| A
-  A -->|Logs In/Out| B
+   ```bash
+   npm install
+   ```
 
+3. Start the API:
+
+   ```bash
+   npm start
+   ```
+
+   The API will be available at `http://localhost:3000`.
+
+## Project Structure
+
+The project follows a layered architecture pattern to promote modularity and maintainability. The layers include:
+
+- **API Layer:** Responsible for handling incoming HTTP requests and invoking the appropriate business logic.
+
+- **Business Layer:** Contains the core business logic and orchestrates interactions between different components.
+
+- **Routes Layer:** Defines the API routes and their corresponding controllers.
+
+The persistence layer is kept lightweight as the primary focus is on business logic. Transactions are efficiently handled to ensure data integrity, especially during complex operations.
+
+## Features
+
+- **Car Search:** Users can search for cars based on various criteria such as make, model, pricing, and more.
+
+- **Car Listing:** Superusers can create car listings that are displayed on the marketplace.
+
+- **Booking:** Users can book a car, and cancellations are allowed after the first 24 hours of booking.
+
+- **Swagger API Docs:** Comprehensive API documentation is available using Swagger.
+
+## Unit Tests
+
+The project includes unit tests written using Jest to ensure the reliability and correctness of critical components.
+
+To run the tests:
+
+```bash
+npm test
 ```
 
-### Functional Decomposition
+## Docker Compose
 
-1. **Cars Service**
-    - Subsystem responsible for handling car-related functionalities.
-        - Manages car creation by superusers.
-        - Facilitates car search and filtering for users.
-        - Handles booking and cancellation requests.
-        - Ensures bookings reflect in searches.
-2. Identity Service
-    - Subsystem responsible for handling user authentication and sessions.
-        - Manages user logins and logouts.
-        - Ensures secure access to user-specific functionalities.
-3. Booking service
-    1. Subsystem responsible for handling booking creation and delation 
-        1. List bookings 
-        2. Delete bookings
+The development environment is containerized using Docker Compose, making it easy to set up and manage dependencies. The Docker Compose configuration includes the API service and a PostgreSQL database.
 
-### Domain-Driven Analysis
+To start the development environment:
 
-- **Car Domain**
-    - Entities: Car, Booking
-    - Repositories: CarRepository, BookingRepository
-    - Services: CarsService, BookingsService
-- **User Domain**
-    - Entities: User
-    - Repositories: UserRepository
-    - Services: UsersService
-
-```mermaid
-erDiagram
-  USERS ||--o{ BOOKINGS : makes
-  CARS ||--o{ BOOKINGS : has
-  USERS {
-    string userId
-    string username
-    string password
-  }
-  CARS {
-    string carId
-    string make
-    string model
-    int year
-    int mileage
-    float pricing
-  }
-  BOOKINGS {
-    string bookingId
-    date bookingDate
-    bool isCancelable
-  }
+```bash
+docker-compose up
 ```
 
-## System Quality Attributes
+## Prisma ORM
 
-- **Availability**: Target 99.9% uptime.
-- **Scalability**: Should handle increased user and listing volume gracefully.
-- **Security**: Implement secure user authentication and data encryption.
-- **Maintainability**: Codebase should be modular and well-documented.
-- **Testability**: Implement comprehensive unit and integration testing.
+Prisma is used as the ORM (Object-Relational Mapping) tool to interact with the database. It simplifies database operations and ensures a smooth integration between the application and the database.
 
-# Proposed Solution (Architecture)
+## Swagger API Docs
 
----
+Explore the API using Swagger documentation available at `http://localhost:3000/api-docs`.
 
-Describe the solution to the problems outlined above. Include enough detail to allow for productive discussion and comments from readers.
+## Service Design Document
 
-## High-Level Architecture
-
-```mermaid
-graph TD
-  A[Client] -->|Requests| B[API Gateway]
-	B -->|Auth/Authz| I[Identity Service]
-  B -->|List Cars| C[CarsService]
-	B -->|Create Bookings| Bo[BookingsService]
-  C -->|Interacts with| D[Database]
-	I -->|Interacts with| D1[Database]
-	Bo -->|Interacts with| D2[Database]
-
-```
-
-- **API Gateway**: Central entry point for all requests, Can enforce role-based access in coordination with the Identity service
-- **CarsService**: Manages car-related functionalities.
-- **BookingsService**: Manages car-related functionalities.
-- **IdentityService**: Handles user authentication and sessions.
-
-## Detailed Components
+Refer to the [Service Design Document](https://amrhassanabdullah.notion.site/CaTrip-Seezer-a3ed466fd65546c1ad027c33b2dd83f7?pvs=4) on Notion for a detailed overview of the project's service design.
 
 
-
-## API Collection
-
-
-
-# Open questions
-
-## Assumptions
+## Future Work
+- (feat) Pass the userid in the headers to only allow the owner of the booking to actually cancel it.
+- **Productization:** Transform the application into a production-ready state with considerations for scalability, performance, and security.
+- **Dockerization for Production:** Extend the Docker configuration for production deployment, including orchestration with tools like Kubernetes.
+- **Database Indexing:** Optimize database queries by creating appropriate indexes to enhance performance.
+- **CI/CD Integration:** Implement Continuous Integration and Continuous Deployment (CI/CD) pipelines to automate testing and deployment processes.
+- **Monitoring and Alerting:** Set up monitoring tools to track query latency, data size, and implement alerts for potential issues.
+- **Rate Limiting:** Implement rate-limiting mechanisms to control the frequency of API requests and prevent abuse.
+- **Microservices Architecture:** Explore migrating to a microservices architecture for improved scalability and maintainability.
+- **Distributed Transactions:** Investigate and implement solutions for handling distributed transactions in a microservices environment.
+- **Distributed Tracing:** Integrate distributed tracing tools to monitor and analyze transactions across microservices.
+Most of these topics are addressed in the [design document](#service-design-document).
