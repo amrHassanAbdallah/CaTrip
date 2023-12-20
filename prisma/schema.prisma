@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cars {
+  id          String  @id @default(uuid())
+  make        String
+  model       String
+  year        Int
+  mileage     Int
+  price       Int
+  isAvailable Boolean @default(true)
+  @@index([isAvailable, year], name: "carId_index")
+
+}
+
+model bookings {
+  id          String   @id @default(uuid())
+  carId     String
+  userId String
+
+  startDate DateTime
+  endDate   DateTime
+  isCanceled Boolean
+
+}
+
+model users {
+  id          String   @id @default(uuid())
+  username String
+  password String
+}

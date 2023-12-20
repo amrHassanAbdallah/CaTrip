@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # Node.js app
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.dev
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    command: ["sh", "-c", "npm run prisma:migrate && npm run start:dev"]
+  # PostgreSQL database
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: catrip
+      POSTGRES_USER: cooladmin
+      POSTGRES_PASSWORD: thisisaverystrongpassword
+
+  # Prisma Studio
+  prisma-studio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["npx", "prisma", "studio"]
+    ports:
+      - "5555:5555"
+    env_file:
+      - .env.dev
