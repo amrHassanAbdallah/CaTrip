@@ -1,7 +1,7 @@
 const {validationResult} = require('express-validator');
 const prisma = require('../config/database');
 const {Book, Cancel} = require("../business/bookings");
-const MyCustomError = require("../business/types");
+const {MyCustomError} = require("../business/types");
 
 // Booking a car
 exports.bookCar = async (req, res) => {
