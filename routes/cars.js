@@ -114,7 +114,7 @@ const express = require('express');
 const { body, query } = require('express-validator');
 
 const router = express.Router();
-const carController = require('../carController');
+const carController = require('../api/cars');
 
 router.post('/', [
   body('make').notEmpty().withMessage('Make is required').isString()

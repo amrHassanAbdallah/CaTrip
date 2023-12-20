@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   // Capture the response size
   const originalSend = res.send;
   res.send = (...args) => {
-    res.responseSize = Buffer.from(args[0]).length; // Use args[0] instead of body
+    res.responseSize = Buffer.from(args[0]).length || 0;
     originalSend.apply(res, args);
   };
 

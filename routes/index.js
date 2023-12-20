@@ -16,6 +16,7 @@ const cors = require('cors');
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const carRoutes = require('./cars');
+const bookingsRoutes = require('./bookings');
 const swaggerSpec = require('../swaggerSpec');
 const loggerMiddleware = require('./middlewares/logger');
 const logger = require('../config/logger');
@@ -28,6 +29,7 @@ module.exports = (app) => {
   carRouter.use(cors());
 
   carRouter.use('/cars', carRoutes);
+  carRouter.use('/bookings', bookingsRoutes);
   app.use(express.json());
   app.use('/api/v1', carRouter);
 
