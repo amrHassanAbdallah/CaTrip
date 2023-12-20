@@ -137,7 +137,7 @@ router.get('/', [
   query('mileage').optional().isInt().toInt(),
   query('page').optional().isInt({ min: 1 }).toInt(),
   query('pageSize').optional().isInt({ min: 1, max: 100 }).toInt(),
-  query('sort').optional().isIn(['make', 'model', 'year', 'mileage', 'price'])
+  query('sort').optional().isIn(['make', 'model', 'year', 'mileage', 'price']),
 ], carController.searchCars);
 
 module.exports = router;

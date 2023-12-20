@@ -96,17 +96,19 @@ const bookingController = require('../api/bookings');
 router.post('/', [
   body('carId').notEmpty().withMessage('Car ID is required').isString(),
   body('userId').notEmpty().withMessage('User ID is required').isString(),
-  body('startDate').notEmpty().withMessage('Start date is required').isISO8601().toDate(),
+  body('startDate').notEmpty().withMessage('Start date is required').isISO8601()
+    .toDate(),
   body('endDate')
-      .notEmpty().withMessage('End date is required')
-      .isISO8601().toDate()
-      .custom((endDate, { req }) => {
-        const startDate = new Date(req.body.startDate);
-        if (endDate <= startDate) {
-          throw new Error('End date must be after the start date');
-        }
-        return true;
-      }),
+    .notEmpty().withMessage('End date is required')
+    .isISO8601()
+    .toDate()
+    .custom((endDate, { req }) => {
+      const startDate = new Date(req.body.startDate);
+      if (endDate <= startDate) {
+        throw new Error('End date must be after the start date');
+      }
+      return true;
+    }),
 ], bookingController.bookCar);
 
 router.delete('/:bookingId', [
