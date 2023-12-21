@@ -1,5 +1,4 @@
-
-# Car Listing Marketplace API
+# CaTrip
 
 Welcome to the Car Listing Marketplace API! This API allows users to browse and interact with car listings, make bookings, and more.
 
@@ -10,12 +9,12 @@ Welcome to the Car Listing Marketplace API! This API allows users to browse and 
 - [Project Structure](#project-structure)
 - [Features](#features)
 - [Unit Tests](#unit-tests)
+- [Linting](#linting)
 - [Docker Compose](#docker-compose)
 - [Prisma ORM](#prisma-orm)
 - [Swagger API Docs](#swagger-api-docs)
 - [Service Design Document](#service-design-document)
 - [Future Work](#future-work)
-
 
 ## Introduction
 
@@ -78,6 +77,14 @@ To run the tests:
 npm test
 ```
 
+## Linting
+
+The codebase adheres to the Airbnb linting rules. To run the linting:
+
+```bash
+npm run lint
+```
+
 ## Docker Compose
 
 The development environment is containerized using Docker Compose, making it easy to set up and manage dependencies. The Docker Compose configuration includes the API service and a PostgreSQL database.
@@ -100,7 +107,6 @@ Explore the API using Swagger documentation available at `http://localhost:3000/
 
 Refer to the [Service Design Document](https://bit.ly/catrip-sys-design) on Notion for a detailed overview of the project's service design.
 
-
 ## Future Work
 - (feat) Pass the userid in the headers to only allow the owner of the booking to actually cancel it.
 - **Productization:** Transform the application into a production-ready state with considerations for scalability, performance, and security.
@@ -112,4 +118,5 @@ Refer to the [Service Design Document](https://bit.ly/catrip-sys-design) on Noti
 - **Microservices Architecture:** Explore migrating to a microservices architecture for improved scalability and maintainability.
 - **Distributed Transactions:** Investigate and implement solutions for handling distributed transactions in a microservices environment.
 - **Distributed Tracing:** Integrate distributed tracing tools to monitor and analyze transactions across microservices.
-Most of these topics are addressed in the [design document](https://bit.ly/catrip-sys-design).
+  Most of these topics are addressed in the [design document](https://bit.ly/catrip-sys-design).
+```
