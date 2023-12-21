@@ -98,7 +98,7 @@ Explore the API using Swagger documentation available at `http://localhost:3000/
 
 ## Service Design Document
 
-Refer to the [Service Design Document](https://amrhassanabdullah.notion.site/CaTrip-Seezer-a3ed466fd65546c1ad027c33b2dd83f7?pvs=4) on Notion for a detailed overview of the project's service design.
+Refer to the [Service Design Document](https://bit.ly/catrip-sys-design) on Notion for a detailed overview of the project's service design.
 
 
 ## Future Work
@@ -112,4 +112,4 @@ Refer to the [Service Design Document](https://amrhassanabdullah.notion.site/CaT
 - **Microservices Architecture:** Explore migrating to a microservices architecture for improved scalability and maintainability.
 - **Distributed Transactions:** Investigate and implement solutions for handling distributed transactions in a microservices environment.
 - **Distributed Tracing:** Integrate distributed tracing tools to monitor and analyze transactions across microservices.
-Most of these topics are addressed in the [design document](#service-design-document).
+Most of these topics are addressed in the [design document](https://bit.ly/catrip-sys-design).
